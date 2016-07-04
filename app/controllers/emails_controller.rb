@@ -25,7 +25,7 @@ before_action :find_email, only: [:show, :destroy]
     @email = @user.emails.new(params[:email].permit(:subject, :body))
 
     if @email.save
-      MainMailer.news_email(@users, @email.subject, @email.body)
+      MainMailer.news_email(@users, @email.subject, @email.body).deliver_now
       @email.update(to: @emails)
       redirect_to user_emails_path(@user), notice: "Email successfully sent."
     else

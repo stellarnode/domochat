@@ -20,7 +20,7 @@ class MainMailer < ApplicationMailer
     puts @emails, @subject, @message
 
     # Line for regular email client:
-    mail(to: @emails, subject: @subject).deliver_now
+    mail(to: @emails, subject: @subject)
 
     # Using Mailgun:
     # parameters = {
