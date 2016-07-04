@@ -1,2 +1,17 @@
-<h1>Profile#edit</h1>
-<p>Find me in app/views/profile/edit.html.erb</p>
+<h1>EDIT PROFILE</h1>
+
+<%= simple_form_for @profile, url: profile_path do |f| %>
+    <%= f.error_notification %>
+
+    <div class="form-inputs">
+      <%= f.input :first_name %>
+      <%= f.input :last_name %>
+      <%= f.input :middle_name %>
+      <%= f.input :phone %>
+      <%= f.input :avatar %> <%# as: :file %>
+    </div>
+
+    <div class="form-actions">
+      <%= f.button :submit %>
+    </div>
+<% end %>
