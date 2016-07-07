@@ -21,7 +21,7 @@ before_action :find_email, only: [:show, :destroy]
     @email = current_user.emails.new(params[:email].permit(:subject, :body))
 
     if @email.save
-      MainMailer.news_email(@emails, @email.subject, @email.body).deliver_now
+      EmailWorker.perform_async(@emails, @email.subject, @email.body)
       @email.update(to: @emails)
       redirect_to user_emails_path(current_user), notice: "Email successfully sent."
     else
