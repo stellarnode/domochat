@@ -8,6 +8,8 @@ class MainMailer < ApplicationMailer
     @subject = subject
 
     # Line for regular email client:
+
     mail(to: @recipients, subject: @subject)
+
   end
 end
