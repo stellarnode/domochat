@@ -18,7 +18,7 @@ class UsersController < ApplicationController
     respond_to do |format|
       if @user.update(user_params)
         sign_in(@user == current_user ? @user : current_user, :bypass => true)
-        format.html { redirect_to root_url, notice: 'Your profile was successfully updated.' }
+        format.html { redirect_to root_url, notice: 'Your profiles was successfully updated.' }
         format.json { head :no_content }
       else
         format.html { render action: 'edit' }
@@ -35,7 +35,7 @@ class UsersController < ApplicationController
         #в оригинале было @user.skip_reconfirmation!
         @user.skip_reconfirmation! if @user.respond_to?(:skip_reconfirmation)
         sign_in(@user, :bypass => true)
-        redirect_to root_url, notice: 'Your profile was successfully updated.'
+        redirect_to root_url, notice: 'Your profiles was successfully updated.'
       else
         @show_errors = true
       end
