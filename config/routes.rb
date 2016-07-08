@@ -20,4 +20,6 @@ Rails.application.routes.draw do
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
 
+  get '/chat' => 'chat#index'
+
 end
