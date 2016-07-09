@@ -1,12 +1,10 @@
 class ChatMessagesController < ApplicationController
   before_action :authenticate_user!
-  before_action :find_user
+  before_action :find_user, :select_chat_messages
   before_action :find_chat_message, only: [:show, :destroy]
   enable_sync
 
   def index
-    @chat_messages = ChatMessage.all.order("created_at ASC")
-
     respond_to do |format|
       format.html
       format.json { render json: @chat_messages }
@@ -26,7 +24,7 @@ class ChatMessagesController < ApplicationController
     respond_to do |format|
       if @chat_message.save
         sync_new @chat_message
-        format.html { redirect_to chat_messages_path }
+        format.html { redirect_to chat_messages_url }
         format.json { render json: @chat_message, status: :created, location: @chat_message }
       else
         format.html { render action: "new" }
@@ -53,6 +51,10 @@ class ChatMessagesController < ApplicationController
 
   def chat_message_params
     params.require(:chat_message).permit(:message)
+  end
+
+  def select_chat_messages
+    @chat_messages = ChatMessage.all.order("created_at ASC")
   end
 
 end

@@ -4,9 +4,7 @@
 
 <div id="message_view">
   <ul>
-    <% @chat_messages.each do |chat_message| %>
-      <%= sync partial: 'chat_message', resource: chat_message %>
-    <% end %>
+    <%= sync partial: 'chat_message', collection: @chat_messages %>
     <%= sync_new partial: 'chat_message', resource: @user.chat_messages.build, direction: :append %>
   </ul>
 </div>
