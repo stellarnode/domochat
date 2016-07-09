@@ -1,0 +1,24 @@
+<h1>Chat</h1>
+
+<br />
+
+<div id="message_view">
+  <ul>
+    <% @chat_messages.each do |chat_message| %>
+      <%= sync partial: 'chat_message', resource: chat_message %>
+    <% end %>
+    <%= sync_new partial: 'chat_message', resource: @user.chat_messages.build, direction: :append %>
+  </ul>
+</div>
+
+<br />
+
+<%= render partial: 'form', locals: { chat_message: @user.chat_messages.build } %>
+
+<!-- <div id="message">
+  <form class="form-group">
+    <textarea class="form-control" rows="3"></textarea>
+    <br />
+    <button type="submit" class="btn btn-success message-btn">Send</button>
+  </form>
+</div> -->

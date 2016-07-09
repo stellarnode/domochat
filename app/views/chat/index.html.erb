@@ -2,14 +2,13 @@
   <div class="col-xs-12">
     <h1>Chat</h1>
 
-    <div class="">
-      place for textbox
-    </div>
+    <div id="chat">
 
-    <form class="form-inline">
-      <textarea class="form-control" rows="3"></textarea>
-      <button type="submit" class="btn btn-lg btn-success">Send</button>
-    </form>
+      <%= react_component('MessageView') %>
+
+      <%= react_component('Message', name: "stellar") %>
+
+    </div>
 
   </div>
 </div>

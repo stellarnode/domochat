@@ -3,6 +3,7 @@ class User < ActiveRecord::Base
 
   has_many :identities, dependent: :destroy
   has_many :emails, dependent: :destroy
+  has_many :chat_messages
   has_one :profile, dependent: :destroy
 
   TEMP_EMAIL_PREFIX = 'dc@user'

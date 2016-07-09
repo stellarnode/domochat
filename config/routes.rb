@@ -6,6 +6,7 @@ Rails.application.routes.draw do
 
   resources :flats
   resources :posts
+  resources :chat_messages
 
   root 'welcome#index'
 
@@ -19,7 +20,5 @@ Rails.application.routes.draw do
 
   require 'sidekiq/web'
   mount Sidekiq::Web => '/sidekiq'
-
-  get '/chat' => 'chat#index'
 
 end
