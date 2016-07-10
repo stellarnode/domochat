@@ -58,4 +58,7 @@ Rails.application.configure do
     :authentication => :plain,
   }
 
+  # Required by Websocket-rails to work:
+  config.middleware.delete Rack::Lock
+
 end

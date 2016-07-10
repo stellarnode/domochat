@@ -4,6 +4,7 @@ class User < ActiveRecord::Base
   has_many :identities, dependent: :destroy
   has_many :emails, dependent: :destroy
   has_one :profile, dependent: :destroy
+  has_many :chat_messages
 
   TEMP_EMAIL_PREFIX = 'dc@user'
   TEMP_EMAIL_REGEX = /\Adc@user/
