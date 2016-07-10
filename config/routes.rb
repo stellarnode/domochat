@@ -1,9 +1,6 @@
 Rails.application.routes.draw do
 
-  get 'profile/show'
-
-  get 'profile/edit'
-
+  resource :profile, only: [:show, :update, :edit]
   resources :flats
   resources :posts
   resources :chat_messages

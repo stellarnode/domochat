@@ -40,11 +40,17 @@ gem 'simple_form'
 gem 'figaro'
 gem 'omniauth'
 gem 'omniauth-facebook'
+
 gem 'sidekiq'
+
 gem 'react-rails'
 gem 'faye'
 gem 'thin', require: false
 gem 'render_sync'
+
+gem 'carrierwave'
+
+
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console
