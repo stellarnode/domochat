@@ -4,7 +4,7 @@ To run this application, remember to do the following (instructions given for Ma
 
 * Install Redis: `brew install redis`
 
-* Run Redis server: `/usr/local/bin redis-server` (in a separate terminal window)
+* Run Redis server: `/usr/local/bin/redis-server` (in a separate terminal window)
 
 * Launch Sidekiq for async jobs in a separate terminal window: `bundle exec sidekiq`
 
