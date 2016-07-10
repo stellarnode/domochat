@@ -42,7 +42,8 @@ gem 'omniauth'
 gem 'omniauth-facebook'
 gem 'sidekiq'
 gem 'react-rails'
-gem 'pusher'
+gem 'faye'
+gem 'thin', require: false
 gem 'render_sync'
 
 group :development, :test do

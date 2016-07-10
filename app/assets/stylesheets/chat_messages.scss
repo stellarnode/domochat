@@ -7,7 +7,7 @@
   height: 400px;
   border: 1px solid #ccc;
   border-radius: 4px;
-  overflow-y: scroll;
+  overflow-y: auto;
 
   ul {
     list-style-type: none;
@@ -21,4 +21,8 @@
 
 .message-btn {
   // float: right;
+}
+
+.current_user {
+  color: green;
 }

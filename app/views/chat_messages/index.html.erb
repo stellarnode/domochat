@@ -5,18 +5,10 @@
 <div id="message_view">
   <ul>
     <%= sync partial: 'chat_message', collection: @chat_messages %>
-    <%= sync_new partial: 'chat_message', resource: @user.chat_messages.build, direction: :append %>
+    <%= sync_new partial: 'chat_message', resource: @user.chat_messages.build %>
   </ul>
 </div>
 
 <br />
 
 <%= render partial: 'form', locals: { chat_message: @user.chat_messages.build } %>
-
-<!-- <div id="message">
-  <form class="form-group">
-    <textarea class="form-control" rows="3"></textarea>
-    <br />
-    <button type="submit" class="btn btn-success message-btn">Send</button>
-  </form>
-</div> -->
