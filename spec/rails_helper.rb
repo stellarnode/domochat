@@ -57,8 +57,8 @@ RSpec.configure do |config|
   config.include RequestHelpers, :type => :request
 
   config.include Devise::TestHelpers, type: :controller
-  config.include Devise::TestHelpers, type: :view
-  config.include Devise::TestHelpers, type: :request
+  #config.include Devise::TestHelpers, type: :view
+  #config.include Devise::TestHelpers, type: :request
 
   config.include FactoryGirl::Syntax::Methods
   config.include Capybara::DSL
