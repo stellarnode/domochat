@@ -1,12 +1,12 @@
 require 'rails_helper'
-include Devise::TestHelpers
+#include Devise::TestHelpers
 
 describe 'Omniauth', type: :request do
 
-before do
-  	Rails.application.env_config['devise.mapping'] = Devise.mappings[:user] # If using Devise
-  	Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
-end
+#before do
+#    Rails.application.env_config['devise.mapping'] = Devise.mappings[:user] # If using Devise
+#    Rails.application.env_config['omniauth.auth'] = OmniAuth.config.mock_auth[:facebook]
+#end
 
   subject { page }
  

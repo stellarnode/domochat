@@ -31,7 +31,7 @@ gem 'puma'
 # Use Capistrano for deployment
 gem 'capistrano-rails', group: :development
 
-gem 'devise'
+gem 'devise', '4.1.1'
 gem 'devise_invitable'
 gem "pundit"
 gem "rolify"
