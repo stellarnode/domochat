@@ -20,7 +20,7 @@ describe "Sign in and further:" do
     visit new_user_session_path
     fill_in "Email", :with => "w@w.ru"
     fill_in "Password", :with => "qwerty"
-    click_button 'Log in'
+    click_button 'Sign in'
   end
   
   it "should successfully login" do
@@ -77,7 +77,7 @@ describe "Other" do
     visit new_user_session_path
     fill_in "Email", :with => "q@q.ru"
     fill_in "Password", :with => "qwerty123"
-    click_button 'Log in'
+    click_button 'Sign in'
     user_sign_in_count = @user.sign_in_count
     user = User.find(@user.id)
     expect(user.sign_in_count).to eq(user_sign_in_count)
@@ -102,7 +102,7 @@ describe "Other" do
     fill_in "Email", :with => "w@w.ru"
     fill_in "Password", :with => "qwerty"
     page.check('Remember me')
-    click_button 'Log in'
+    click_button 'Sign in'
     user = User.find(user.id)
     expect(user.remember_created_at).to_not eq nil
   end
