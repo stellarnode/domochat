@@ -11,21 +11,18 @@ class ChatMessagesController < ApplicationController
 
   def create
     @chat_message = current_user.chat_messages.build(chat_message_params)
-    respond_to do |format|
-      if @chat_message.save
-        # ActionCable.server.broadcast 'chat',
-        #   message: @chat_message.message,
-        #   user: @chat_message.user.email
-        # head :ok
-        ChatChannel.broadcast_to(
-          'chat',
-          user: @chat_message.user.email,
-          message: @chat_message.message
-        )
-      else
-        format.json { render json: @chat_message.errors, status: :unprocessable_entity }
-      end
+    if @chat_message.save
+      # ActionCable.server.broadcast 'chat',
+      #   message: @chat_message.message,
+      #   user: @chat_message.user.email
+      # head :ok
+      ChatChannel.broadcast_to(
+        'chat',
+        user: @chat_message.user.email,
+        message: @chat_message.message
+      )
     end
+
   end
 
   def update
