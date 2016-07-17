@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
-  
-  before_filter :ensure_signup_complete, only: [:new, :create, :update, :destroy]
+
+  before_action :ensure_signup_complete, only: [:new, :create, :update, :destroy]
   # Prevent CSRF attacks by raising an exception.
   # For APIs, you may want to use :null_session instead.
 

@@ -9,5 +9,10 @@ App.chat = App.cable.subscriptions.create("ChatChannel", {
 
   received: function(data) {
     // Called when there's incoming data on the websocket for this channel
+    $('#message_view').append(this.renderMessage(data));
+  },
+
+  renderMessage: function(data) {
+    return "<li> <strong>" + data.user + ": </strong>" + data.message + "</li>";
   }
 });

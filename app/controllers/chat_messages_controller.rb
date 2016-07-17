@@ -1,6 +1,5 @@
 class ChatMessagesController < ApplicationController
   before_action :authenticate_user!
-  enable_sync
 
   def index
     @chat_messages = ChatMessage.all.order("created_at ASC")
@@ -14,7 +13,15 @@ class ChatMessagesController < ApplicationController
     @chat_message = current_user.chat_messages.build(chat_message_params)
     respond_to do |format|
       if @chat_message.save
-        sync_new @chat_message
+        # ActionCable.server.broadcast 'chat',
+        #   message: @chat_message.message,
+        #   user: @chat_message.user.email
+        # head :ok
+        ChatChannel.broadcast_to(
+          'chat',
+          user: @chat_message.user.email,
+          message: @chat_message.message
+        )
       else
         format.json { render json: @chat_message.errors, status: :unprocessable_entity }
       end

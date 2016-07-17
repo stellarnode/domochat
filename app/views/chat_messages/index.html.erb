@@ -3,10 +3,13 @@
 <br />
 
 <div id="message_view">
+
+  <% if @chat_messages.any? %>
   <ul>
-    <%= sync partial: 'chat_message', collection: @chat_messages %>
-    <%= sync_new partial: 'chat_message', resource: ChatMessage.new %>
+    <%= render partial: 'chat_message', collection: @chat_messages %>
   </ul>
+  <% end %>
+
 </div>
 
 <br />

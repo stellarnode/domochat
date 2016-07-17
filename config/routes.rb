@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
 
+  # mount ActionCable.server => '/cable'
+
   resource :profile, only: [:show, :update, :edit]
   resources :flats
   resources :posts
