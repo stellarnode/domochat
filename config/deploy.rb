@@ -25,17 +25,11 @@ set :scm, :git
 # set :pty, true
 
 # Default value for :linked_files is []
-<<<<<<< HEAD
+
 set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml', 'config/application.yml')
 
 # Default value for linked_dirs is []
 set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system')
-=======
-set :linked_files, fetch(:linked_files, []).push('config/database.yml', 'config/secrets.yml','config/application.yml')
-
-# Default value for linked_dirs is []
-set :linked_dirs, fetch(:linked_dirs, []).push('log', 'tmp/pids', 'tmp/cache', 'tmp/sockets', 'public/system','public/upload')
->>>>>>> 6c01ee063c3600f788032b121ccf9080a5d2c758
 
 # Default value for default_env is {}
 # set :default_env, { path: "/opt/ruby/bin:$PATH" }
