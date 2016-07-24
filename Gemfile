@@ -31,7 +31,14 @@ gem 'puma'
 gem 'redis'
 
 # Use Capistrano for deployment
-gem 'capistrano-rails', group: :development
+group :development do
+  gem 'capistrano',         require: false
+  gem 'capistrano-sidekiq', require: false
+  gem 'capistrano-rails'
+  gem 'capistrano-bundler', require: false
+  gem 'capistrano3-puma',   require: false
+  gem 'capistrano-crono'
+end
 
 gem 'devise', '4.1.1'
 gem 'devise_invitable'
@@ -47,7 +54,11 @@ gem 'sidekiq'
 
 gem 'carrierwave'
 
+gem 'sprockets', '3.6.3' # Delete version number once Sprockets 4.0 become available
+gem 'sprockets-es6'
+
 gem 'rack', '~> 2.0.1'
+gem 'rails-controller-testing'
 
 
 group :development, :test do
@@ -57,7 +68,6 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'ffaker'
   gem 'capybara'
-
   gem 'pry-rails'
 end
 
