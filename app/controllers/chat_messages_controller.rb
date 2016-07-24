@@ -1,9 +1,10 @@
 class ChatMessagesController < ApplicationController
   before_action :authenticate_user!
-  enable_sync
+  before_action :set_user, only: [:index]
 
   def index
     @chat_messages = ChatMessage.all.order("created_at ASC")
+    @chat_message = ChatMessage.new
     respond_to do |format|
       format.html
       format.json { render json: @chat_messages }
@@ -12,13 +13,19 @@ class ChatMessagesController < ApplicationController
 
   def create
     @chat_message = current_user.chat_messages.build(chat_message_params)
-    respond_to do |format|
-      if @chat_message.save
-        sync_new @chat_message
-      else
-        format.json { render json: @chat_message.errors, status: :unprocessable_entity }
-      end
+    if @chat_message.save
+      # ActionCable.server.broadcast 'chat',
+      #   message: @chat_message.message,
+      #   user: @chat_message.user.email
+      # head :ok
+      ChatChannel.broadcast_to(
+        'chat',
+        user: @chat_message.user.email,
+        message: @chat_message.message
+      )
+
     end
+
   end
 
   def update
@@ -31,6 +38,10 @@ class ChatMessagesController < ApplicationController
 
   def chat_message_params
     params.require(:chat_message).permit(:message)
+  end
+
+  def set_user
+    cookies[:user_email] = current_user.email || 'guest'
   end
 
 end
