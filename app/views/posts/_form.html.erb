@@ -2,15 +2,25 @@
   <%= f.error_notification %>
 
   <div class="form-inputs">
-    <%= f.input :title %>
-    <%= f.input :body %>
-    <%= f.association :author %>
-    <%= f.input :is_pinned %>
-    <%= f.input :is_draft %>
-    <%= f.input :comments_count %>
+    <%= f.input :title, label: 'Title', autocomplete: "off", placeholder: "Add your post title here" %>
+    <%= f.input :body, label: 'Body', autocomplete: "off", placeholder: "Add your post here",
+    :input_html => {rows: 7} %>
+    <% if can? :manage, :all %>
+      <%= f.input :is_pinned, label: 'Pin to newsboard' %>
+    <% else %>
+      <%= f.hidden_field :is_pinned, label: 'Pin to newsboard', value: false %>
+    <% end %>
+    <%= f.input :is_draft, label: 'Save as draft' %>
+    <%= f.input :commentable, label: 'Allow comments' %>
+
+    <%= f.simple_fields_for :post_categories do |ff| %>
+      <% @post.categories.blank? ? category = '' : category = @post.categories.first.id %>
+      <%= ff.input :category_id, label: 'Category', as: :select, collection: $categories, selected: category %>
+    <% end %>
   </div>
 
   <div class="form-actions">
-    <%= f.button :submit %>
+    <%= f.submit "Save Post", class: "btn btn-lg btn-primary" %>
   </div>
+  <br>
 <% end %>

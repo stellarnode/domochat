@@ -1,15 +1,21 @@
-class User < ActiveRecord::Base
-  after_create :create_profile
-
-  has_many :identities, dependent: :destroy
-  has_many :emails, dependent: :destroy
-  has_many :chat_messages
-  has_one :profile, dependent: :destroy
+class User < ApplicationRecord
 
   TEMP_EMAIL_PREFIX = 'dc@user'
   TEMP_EMAIL_REGEX = /\Adc@user/
 
+  after_create  :create_profile
+  after_create  :add_role_to_user
+  has_one       :profile, dependent: :destroy
+  has_many      :posts
+  has_many      :identities, dependent: :destroy
+  has_many      :emails, dependent: :destroy
+  has_many      :polls
+  has_many      :chat_messages
+  has_many      :votes
+  has_many      :payments, dependent: :destroy
+
   rolify
+
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable
   devise :invitable, :database_authenticatable, :registerable,
@@ -46,7 +52,6 @@ class User < ActiveRecord::Base
           email: email ? email : "#{TEMP_EMAIL_PREFIX}-#{auth.uid}-#{auth.provider}.com",
           password: Devise.friendly_token[0,20]
         )
-        #в оригинале было user.skip_confirmation!
         user.skip_confirmation! if user.respond_to?(:skip_confirmation)
         user.save!
       end
@@ -66,5 +71,13 @@ class User < ActiveRecord::Base
 
   def create_profile
     Profile.create(user: self)
+  end
+
+  def add_role_to_user
+    if !self.has_any_role? && self == User.first
+      self.add_role :admin
+    else
+      self.add_role :user
+    end
   end
 end

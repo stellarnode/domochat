@@ -13,6 +13,7 @@ describe "Sign Up" do
     expect(page).to have_content('Welcome! You have signed up successfully.')
   end
 end  
+
 describe "Sign in and further:" do
   before do
     @user = FactoryGirl.create(:user, :email => "w@w.ru", :password => "qwerty", 

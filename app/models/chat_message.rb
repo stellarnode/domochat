@@ -1,4 +1,3 @@
-class ChatMessage < ActiveRecord::Base
+class ChatMessage < ApplicationRecord
   belongs_to :user
-  # sync :all
 end

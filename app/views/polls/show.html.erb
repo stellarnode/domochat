@@ -1,0 +1,40 @@
+<h2><%= @poll.title %></h2>
+<p><b>Body:</b> <%= @poll.body %></p>
+<p><b>Start:</b> <%= @poll.start.to_formatted_s(:long_ordinal) %></p>
+<p><b>Finish:</b> <%= @poll.finish.to_formatted_s(:long_ordinal) %></p>
+    
+<p><b>Poll Type: </b><%= show_poll_type(@poll) %></p> 
+
+<p><b>User:</b> <%= @poll.user_id %></p>
+
+<p><b>Poll ID:</b> <%= @poll.id %></p>
+
+<p><b>Options:</b></p>
+<% @poll.options.each_with_index do |option, index| %>
+  <p>Opt. <%= index + 1 %>: <b><%= option.poll_option %>
+  <%= show_poll_options(@poll, option) %>
+<% end %>
+
+<p><b>Poll Status:</b> <%= show_poll_status(@poll) %></p>
+<% if @poll.voted_by_user(current_user) %>
+  <p style="color: red"><b>You've already voted for this poll.</b></p>
+<% elsif @poll.opened? %>
+  <div>
+    <%= button_to "Vote now!", voting_poll_path(@poll), method: :get, class: "btn btn-success btn-lg" %>
+  </div>
+  <br>
+<% end %>
+
+<% if current_user.is_admin? or can? :edit, @poll %>
+  <div class="btn-group btn-group-sm" role="group" aria-label="...">
+    <% if (DateTime.now.to_i - @poll.created_at.to_i) < @editing_time && @poll.state == 'created' %>
+      <%= link_to 'Edit', edit_poll_path(@poll), type: 'button', class: 'btn btn-default' %>  
+    <% end %>
+    <%= link_to 'Destroy', @poll, method: :delete, data: { confirm: 'Are you sure?' }, 
+      type: 'button', class: 'btn btn-danger' %>
+    <%= link_to 'My polls', polls_path(show_me: 'my'), type: 'button', class: 'btn btn-default' %>
+    <%= link_to 'All polls', polls_path, type: 'button', class: 'btn btn-default' %>
+  </div>
+<% end %>
+
+<%= render partial: '/shared/pager', locals: { object: @poll, collection: @polls } %>

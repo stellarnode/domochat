@@ -10,10 +10,10 @@ RSpec.describe "posts/new", :type => :view do
     assign(:post, Post.new(
       :title => "MyString",
       :body => "MyText",
-      :author_id => user.id,
+      :user_id => user.id,
       :is_pinned => false,
       :is_draft => false,
-      :comments_count => 1
+      :commentable => false
     ))
   end
 
@@ -30,7 +30,7 @@ RSpec.describe "posts/new", :type => :view do
 
       assert_select "input#post_is_draft[name=?]", "post[is_draft]"
 
-      assert_select "input#post_comments_count[name=?]", "post[comments_count]"
+      assert_select "input#post_commentable[name=?]", "post[commentable]"
     end
   end
 end

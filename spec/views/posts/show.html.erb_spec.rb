@@ -10,10 +10,10 @@ RSpec.describe "posts/show", :type => :view do
     @post = assign(:post, Post.create!(
       :title => "MyString",
       :body => "MyText",
-      :author_id => user.id,
+      :user_id => user.id,
       :is_pinned => false,
       :is_draft => false,
-      :comments_count => 1
+      :commentable => false
     ))
   end
 
@@ -23,11 +23,5 @@ RSpec.describe "posts/show", :type => :view do
     expect(rendered).to include("MyText")
     expect(rendered).to include("false")
     expect(rendered).to include("1")
-    #expect(rendered).to match(/Title/)
-    #expect(rendered).to match(/MyText/)
-    #expect(rendered).to match(//)
-    #expect(rendered).to match(/false/)
-    #expect(rendered).to match(/false/)
-    #expect(rendered).to match(/1/)
   end
 end

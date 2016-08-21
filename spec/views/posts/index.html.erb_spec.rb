@@ -11,18 +11,18 @@ RSpec.describe "posts/index", :type => :view do
       Post.create!(
         :title => "MyString",
         :body => "MyText",
-        :author_id => user.id,
+        :user_id => user.id,
         :is_pinned => false,
         :is_draft => false,
-        :comments_count => 1
+        :commentable => false
       ),
       Post.create!(
         :title => "MyString",
         :body => "MyText",
-        :author_id => user.id,
+        :user_id => user.id,
         :is_pinned => false,
         :is_draft => false,
-        :comments_count => 1
+        :commentable => false
       )
     ])
   end
@@ -31,8 +31,6 @@ RSpec.describe "posts/index", :type => :view do
     render
     assert_select "tr>td", :text => "MyString", :count => 2
     assert_select "tr>td", :text => "MyText", :count => 2
-    #assert_select "tr>td", :text => user.id.to_s, :count => 2
-    assert_select "tr>td", :text => false.to_s, :count => 4
-    assert_select "tr>td", :text => 1.to_s, :count => 2
+    assert_select "tr>td", :text => false.to_s, :count => 6
   end
 end
